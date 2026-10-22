@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smart-expense-tracker-deployment
+  labels:
+    app: smart-expense-tracker
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: smart-expense-tracker
+  template:
+    metadata:
+      labels:
+        app: smart-expense-tracker
+    spec:
+      containers:
+      - name: smart-expense-tracker
+        image: <your-dockerhub-username>/smart-expense-tracker:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5000
