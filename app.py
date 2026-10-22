@@ -1,13 +1,16 @@
-from flask import Flask, render_template, request, redirect, url_for
-import pickle
-from flask_sqlalchemy import SQLAlchemy
+
+import os
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Placement%402027@localhost/smart_expense_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(
+    'DATABASE_URL',
+    'mysql+pymysql://root:Placement%402027@localhost/smart_expense_db'
+)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+
 
 class Expense(db.Model):
     id = db.Column(db.Integer, primary_key=True)
