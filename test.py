@@ -1,4 +1,3 @@
-
 import os
 
 os.environ["DATABASE_URL"] = "sqlite:///:memory:"
@@ -10,10 +9,8 @@ def test_home():
 
     with app.app_context():
         db.create_all()
-
         try:
-            client = app.test_client()
-            response = client.get("/")
+            response = app.test_client().get("/")
             assert response.status_code == 200
         finally:
             db.session.remove()
